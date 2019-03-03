@@ -19,4 +19,18 @@ class Stack<T>{
             return removeData;
         }
     }
+    toString(){
+
+        let str: string = '';
+        for(let i: number = 1; i < this.length; i++){
+            if(i + 1!== this.length){
+                str += this.storage[i] + ', ';
+            }
+            else{
+                str += this.storage[i];
+            }
+        }
+        return str;
+    }
+
 }
