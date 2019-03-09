@@ -6,14 +6,14 @@ class NodeElement<T>{
         this.next = null;
     }
 }
-class LinkedList<T>{
+export class LinkedList<T>{
     length: number = 0;
     head: NodeElement<T>;
     constructor(headEl?: NodeElement<T>){
         this.head = headEl || null;
     }
-    add(value: T, positionition?: number) {
-        if(!positionition){
+    add(value: T, position?: number) {
+        if(!position || position === 0){
             let node = new NodeElement(value);
             let current: NodeElement<T>;
 
@@ -30,23 +30,17 @@ class LinkedList<T>{
         return true;
         }
 
-        if (positionition > -1 && positionition < this.length && this.head) {
+        if (position > -1 && position <= this.length && this.head) {
             let current = this.head;
             let index = 0;
             let previous = current;
             let node = new NodeElement<T>(value);
-
-            if (positionition === 0) {
-                node.next = current;
-                this.head = node;
-            } else {
-                while (index++ < positionition && current.next) {
+                while (index++ < position && current.next) {
                     previous = current;
                     current = current.next;
                 }
-                node.next = current;
-                previous.next = node;
-            }
+            node.next = current;
+            previous.next = node;
             this.length++;
             return true;
         } else {
@@ -81,7 +75,7 @@ class LinkedList<T>{
         let current: NodeElement<T> = this.head;
         let str:string = '';
         while (current) {
-            str += current.value;
+            str += current.value + ' ';
             current = current.next;
         }
         return str;
@@ -94,8 +88,23 @@ class LinkedList<T>{
             return false;
         }
     }
-    get(index: number){
-        let element: NodeElement<T> = this.head;
-
+    get(position: number){
+        if(position < 0 || position > this.length){
+            return false;
+        }
+        let elem: NodeElement<T> = this.head;
+        let i: number = 0;
+        while(elem != null){
+            if(position === i){
+                return elem.value; 
+            }
+            elem = elem.next;
+            i++;
+        }
     }
 }
+
+
+
+
+        
