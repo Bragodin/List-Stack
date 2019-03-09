@@ -1,50 +1,46 @@
-class Stack<T>{
-    length: number;
-    storage: object;
-    constructor(){
-        this.length = 0;
-        this.storage = {};
+export class Stack<T>{
+    value: T;
+    next = null;
+    head: Stack<T>;
+    private length: number = 0;
+    push(elem: T){
+        let node = new Stack<T>();
+        node.value = elem;
+        node.next = this.next;
+        this.next = node;
+        this.head = node; 
+        this.length++;
     }
-    push(value: T){
-        const len = ++this.length;
-        this.storage[len] = value;
-    }
-    pop(): object{
-        const len: number = this.length;
-        let removeData;
-        if(len){
-            removeData = this.storage[len];
-            delete this.storage[len];
-            this.length--;
-            return removeData;
-        }
-    }
-    toString(): string{
-
-        let str: string = '';
-        for(let i: number = 1; i <= this.length; i++){
-            str += this.storage[i] + ' ';
-        }
-        return str;
-    }
-    hashcode(): number{
-        const str = this.toString();
-        console.log(str);
-        let hash: number = 0;
-        for(let i = 0; i < str.length; i++){
-            let character = str.charCodeAt(i);
-            hash += character;
-
-        }
-        return hash;
-    }
-    equals(obj: any){
-        if(obj.hashcode() === this.hashcode()){
-            return true;
-        }
-        else{
+    pop(){
+        if(this.next === null){
             return false;
         }
+        let delElem = this.next.value;
+        this.head = this.head.next;
+        this.next = this.next.next;
+        this.length--;
+        return delElem;
+    }
+    toString() {
+        let str: string = '';
+        let h = this.head;
+        while (this.head) {
+            str += this.head.value + ' ';
+            this.head = this.head.next;
+        }
+        this.head = h;
+        return str;
+    }
+    equals(stack: Stack<T>){
+        if(this.size() === stack.size() && stack.toString() === this.toString()){
+            return true;
+        }
+        else {
+            return false
+        }
+    }
+    size(){
+        return this.length;
     }
 }
 
