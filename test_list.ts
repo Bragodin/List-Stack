@@ -37,19 +37,26 @@ describe('LinkedList testing', () => {
         expect(listOne.toString()).to.equal('1 2 3 4 ');
         expect(listThree.toString()).to.equal('two three ');
     });
-    it('Check get metod', () => {
-        expect(listTwo.get(0)).to.equal('two');
-        expect(listOne.get(2)).to.equal(3);
-        expect(listThree.get(1)).to.equal('three');
-        expect(listThree.get(-122)).to.equal(false);
-    });
     it('Check add metod', () => {
         listTwo.add('one');
         listTwo.add('three', 2);
         listOne.add(0);
         expect(listOne.get(2)).to.equal(3);
         expect(listFour.get(1)).to.equal(88);
-        expect(listFour.get(0)).to.equal(0);
+        expect(listFour.get(0)).to.equal(90);
+    });
+    it('Check get metod', () => {
+        expect(listTwo.get(0)).to.equal('two');
+        expect(listTwo.get(55)).to.equal(false);
+        expect(listOne.get(2)).to.equal(3);
+        expect(listThree.get(1)).to.equal('three');
+        expect(listThree.get(-122)).to.equal(false);
+    });
+    it('Check remove metod', () => {
+        expect(listThree.remove(-122)).to.equal(null);
+        expect(listOne.remove(3).value).to.equal(4);
+        expect(listOne.remove(92)).to.equal(null);
+        expect(listThree.remove(1).value).to.equal('three');
     });
 });
     
