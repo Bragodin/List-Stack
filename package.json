@@ -19,6 +19,7 @@
     "typescript": "^3.3.3333"
   },
   "scripts": {
+
     "test": "nyc mocha ./test_list.ts"
   },
   "nyc": {
@@ -50,3 +51,4 @@
   },
   "homepage": "https://github.com/Bragodin/List-Stack#readme"
 }
+
